@@ -63,6 +63,19 @@ router.get(
 );
 
 router.get(
+    "/newImages",
+    auth.authorizePage as () => Promise<void>,
+    responses.getNewImages as () => Promise<void>
+);
+
+router.get(
+    "/newImages/runScraper",
+    auth.authorizePage as () => Promise<void>,
+    responses.runScraper as () => Promise<void>
+);
+
+
+router.get(
     "/logout",
     auth.authorizePage as () => Promise<void>,
     responses.getLogout as () => Promise<void>

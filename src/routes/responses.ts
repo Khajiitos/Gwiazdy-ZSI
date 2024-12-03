@@ -4,8 +4,10 @@ import * as upload from "$/data/upload";
 import { hashString, authenticateUser, validatePassword } from "$/routes/auth";
 import { addLog, clearLogs } from "$/data/log";
 import { directory } from "$/app";
+import { scrape } from "$/data/scraper";
 import type { Response } from "express";
 import type { Request } from "$/routes/auth";
+
 
 // Responses
 export const getRoot = (req: Request, res: Response) => {
@@ -74,6 +76,15 @@ export const postLogin = async (req: Request, res: Response) => {
 
 export const getAdmin = (req: Request, res: Response) => {
     res.render("./layouts/admin.ejs", { user: req.authorized });
+};
+
+export const getNewImages = (req: Request, res: Response) => {
+    res.render("./layouts/newImages.ejs", { user: req.authorized });
+};
+
+export const runScraper = (req: Request, res: Response) => {
+    scrape();
+    return res.append("HX-Redirect", "/newImages").sendStatus(303);
 };
 
 export const getLogout = async (req: Request, res: Response) => {
